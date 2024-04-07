@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Library</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        iframe, audio {
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h2>Video Songs</h2>
+        <label for="videoArtists">Select Artist:</label>
+        <select id="videoArtists" onchange="showVideo()">
+            <option value="">Select Artist</option>
+            <option value="artist1">Artist 1</option>
+            <option value="artist2">Artist 2</option>
+            <option value="artist3">Artist 3</option>
+        </select>
+
+        <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="content">
+        <h2>Audio Songs</h2>
+        <label for="audioArtists">Select Artist:</label>
+        <select id="audioArtists" onchange="playAudio()">
+            <option value="">Select Artist</option>
+            <option value="artist1">Artist 1</option>
+            <option value="artist2">Artist 2</option>
+            <option value="artist3">Artist 3</option>
+        </select>
+
+        <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <script>
+        function showVideo() {
+            var selectedArtist = document.getElementById('videoArtists').value;
+            var videoFrame = document.getElementById('videoFrame');
+
+            if (selectedArtist === 'artist1') {
+                videoFrame.src = 'https://www.youtube.com/embed/VIDEO_ID_1';
+            } else if (selectedArtist === 'artist2') {
+                videoFrame.src = 'https://www.youtube.com/embed/VIDEO_ID_2';
+            } else if (selectedArtist === 'artist3') {
+                videoFrame.src = 'https://www.youtube.com/embed/VIDEO_ID_3';
+            } else {
+                videoFrame.src = '';
+            }
+        }
+
+        function playAudio() {
+            var selectedArtist = document.getElementById('audioArtists').value;
+            var audioPlayer = document.getElementById('audioPlayer');
+
+            if (selectedArtist === 'artist1') {
+                audioPlayer.src = 'audio/artist1_audio.mp3';
+            } else if (selectedArtist === 'artist2') {
+                audioPlayer.src = 'audio/artist2_audio.mp3';
+            } else if (selectedArtist === 'artist3') {
+                audioPlayer.src = 'audio/artist3_audio.mp3';
+            } else {
+                audioPlayer.src = '';
+            }
+        }
+    </script>
+
+</body>
+</html>

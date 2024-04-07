@@ -1,0 +1,263 @@
+
+Write a PHP script to display employees belongs to Sales department and salary is in between 50000 to 90000 and store found records into another table.
+<?php
+// Database connection parameters
+$servername = "localhost";
+$username = "your_username";
+$password = "your_password";
+$database = "your_database";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// SQL query to select employees from Sales department with salary between 50000 to 90000
+$sql = "SELECT * FROM employees WHERE department = 'Sales' AND salary BETWEEN 50000 AND 90000";
+$result = $conn->query($sql);
+
+// Check if any records found
+if ($result->num_rows > 0) {
+  // Create a new table to store the found records
+  $conn->query("CREATE TABLE IF NOT EXISTS sales_employees (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    department VARCHAR(30) NOT NULL,
+    salary DECIMAL(10,2) NOT NULL
+  )");
+
+  // Insert found records into the new table
+  while ($row = $result->fetch_assoc()) {
+    $name = $row['name'];
+    $department = $row['department'];
+    $salary = $row['salary'];
+    $insert_sql = "INSERT INTO sales_employees (name, department, salary) VALUES ('$name', '$department', '$salary')";
+    $conn->query($insert_sql);
+  }
+  echo "Records from Sales department with salary between 50000 to 90000 have been stored in the sales_employees table.";
+} else {
+  echo "No records found for the specified criteria.";
+}
+
+// Close connection
+$conn->close();
+?>
+
+Write a PHP script to design Employee Registration form. Insert 5 records in database and display all the inserted records on new page.
+employee_registration.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Registration</title>
+</head>
+<body>
+<h2>Employee Registration Form</h2>
+<form action="insert_employee.php" method="POST">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" required><br><br>
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" required><br><br>
+  <label for="department">Department:</label><br>
+  <input type="text" id="department" name="department" required><br><br>
+  <label for="salary">Salary:</label><br>
+  <input type="number" id="salary" name="salary" required><br><br>
+  <input type="submit" value="Register">
+</form>
+</body>
+</html>
+insert_employee.php
+<?php
+// Database connection parameters
+$servername = "localhost";
+$username = "your_username";
+$password = "your_password";
+$database = "your_database";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Insert 5 records into the database
+for ($i = 1; $i <= 5; $i++) {
+  $name = "Employee " . $i;
+  $email = "employee" . $i . "@example.com";
+  $department = "IT";
+  $salary = rand(30000, 100000); // Random salary between 30000 to 100000
+
+  $insert_sql = "INSERT INTO employees (name, email, department, salary) VALUES ('$name', '$email', '$department', $salary)";
+  $conn->query($insert_sql);
+}
+
+// Retrieve all inserted records
+$sql = "SELECT * FROM employees";
+$result = $conn->query($sql);
+
+// Display all inserted records
+if ($result->num_rows > 0) {
+  echo "<h2>Inserted Records</h2>";
+  echo "<table border='1'>";
+  echo "<tr><th>ID</th><th>Name</th><th>Email</th><th>Department</th><th>Salary</th></tr>";
+  while ($row = $result->fetch_assoc()) {
+    echo "<tr>";
+    echo "<td>" . $row['id'] . "</td>";
+    echo "<td>" . $row['name'] . "</td>";
+    echo "<td>" . $row['email'] . "</td>";
+    echo "<td>" . $row['department'] . "</td>";
+    echo "<td>" . $row['salary'] . "</td>";
+    echo "</tr>";
+  }
+  echo "</table>";
+} else {
+  echo "No records found.";
+}
+
+// Close connection
+$conn->close();
+?>
+
+Write a program to show current date and time using user defined module in Node J
+// datetime.js
+
+// Function to get the current date and time
+exports.getCurrentDateTime = function() {
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString();
+  const currentTime = currentDate.toLocaleTimeString();
+  return `Current Date: ${formattedDate}\nCurrent Time: ${currentTime}`;
+};
+
+// app.js
+// Import the user-defined module
+const datetime = require('./datetime');
+
+// Get the current date and time using the module
+const currentDateTime = datetime.getCurrentDateTime();
+
+// Display the current date and time
+console.log(currentDateTime);
+
+
+
+
+
+
+Write a PHP program to store the username in a cookie and check whether the user has successfully logged in or not.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+</head>
+<body>
+<h2>Login</h2>
+<form action="process_login.php" method="POST">
+  <label for="username">Username:</label><br>
+  <input type="text" id="username" name="username" required><br><br>
+  <input type="submit" value="Login">
+</form>
+</body>
+</html>
+
+<?php
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Validate username (in real application, you should retrieve username from a database)
+  $valid_username = "admin"; // Sample valid username
+  $username = $_POST['username'];
+
+  if ($username === $valid_username) {
+    // Set username in a cookie (valid for 1 hour)
+    setcookie('username', $username, time() + 3600, '/'); // '/' makes the cookie valid for the entire domain
+
+    // Redirect to a success page
+    header("Location: success.php");
+    exit;
+  } else {
+    // Redirect back to login page with error message
+    header("Location: login.php?error=Invalid username");
+    exit;
+  }
+} else {
+  // Redirect back to login page if accessed directly
+  header("Location: login.php");
+  exit;
+}
+?>
+
+Write a program in NodeJS to perform file CRUD operations by using fs module.
+const fs = require('fs');
+const path = require('path');
+
+// File path
+const filePath = path.join(__dirname, 'example.txt');
+
+// Create a file and write content
+fs.writeFile(filePath, 'This is a sample text.', err => {
+  if (err) {
+    console.error('Error creating file:', err);
+  } else {
+    console.log('File created and content written successfully.');
+    
+    // Read file content
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Error reading file:', err);
+      } else {
+        console.log('File content:', data);
+        
+        // Update file content
+        fs.appendFile(filePath, '\nUpdated content.', err => {
+          if (err) {
+            console.error('Error updating file:', err);
+          } else {
+            console.log('File content updated successfully.');
+            
+            // Read updated file content
+            fs.readFile(filePath, 'utf8', (err, updatedData) => {
+              if (err) {
+                console.error('Error reading updated file:', err);
+              } else {
+                console.log('Updated file content:', updatedData);
+                
+                // Delete file
+                fs.unlink(filePath, err => {
+                  if (err) {
+                    console.error('Error deleting file:', err);
+                  } else {
+                    console.log('File deleted successfully.');
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+});
+
+Create an Angular program which will demonstrate the use of ngswitch directive
+ng generate component switch-demo
+
+<div [ngSwitch]="color">
+  <div *ngSwitchCase="'red'">Red Color</div>
+  <div *ngSwitchCase="'blue'">Blue Color</div>
+  <div *ngSwitchCase="'green'">Green Color</div>
+  <div *ngSwitchDefault>Default Color</div>
+</div>
+
+<select [(ngModel)]="color">
+  <option value="red">Red</option>
+  <option value="blue">Blue</option>
+  <option value="green">Green</option>
+</select>
+ 
+

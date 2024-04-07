@@ -1,0 +1,178 @@
+.html 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo"><label>Logo</label></div>
+            <div class="menus">
+                <div class="menu1">
+                    <label class="menu1-title">Menu1</label><br>
+                    <label>submenu1</label><br>
+                    <label>submenu2</label><br>
+                    <label>submenu3</label>
+                </div>
+                <div class="menu2">
+                    <label class="menu2-title">Menu1</label><br>
+                    <label>submenu1</label><br>
+                    <label>submenu2</label><br>
+                    <label>submenu3</label>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <label>Header</label>
+            </div>
+            <div class="contents">
+                <div class="content1">
+                    <label>Contents</label>
+                    <table class="img-table">
+                        <tr>
+                            <td>IMG</td>
+                            <td>IMG</td>
+                            <td>IMG</td>
+                        </tr>
+                        <tr>
+                            <td>IMG</td>
+                            <td>IMG</td>
+                            <td>IMG</td>
+                        </tr>
+                        <tr>
+                            <td>IMG</td>
+                            <td>IMG</td>
+                            <td>IMG</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="content2">
+                    <label>Contents</label>
+                    <table class="img-table">
+                        <tr>
+                            <td>section</td>
+                            <td>section</td>
+                            <td>section</td>
+                        </tr>
+                        <tr>
+                            <td>section</td>
+                            <td>section</td>
+                            <td>section</td>
+                        </tr>
+                        <tr>
+                            <td>section</td>
+                            <td>section</td>
+                            <td>section</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="footer">
+                <label>Footer</label>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+====================================================
+.css file
+
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    height: 550px;
+    display: flex;
+    border: 1px solid #000;
+
+}
+
+.sidebar{
+    width: 25%;
+    height: 550px;
+    border: 1px solid #000;
+
+}
+.logo{
+    height: 50px;
+    font-size: larger;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+    display: flex;
+    border-bottom: 1px solid #000;
+
+}
+.menu1,.menu2{
+    height: 200px;
+    padding: 30px 0px 0px 30px;
+
+
+}
+
+.main-content{
+    width: 75%;
+    border: 1px solid #000;
+}
+.header{
+    height: 50px;
+    font-size: larger;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-bottom: 1px solid #000;
+
+}
+.contents{
+    display: flex;
+    height: 460px;
+}
+.content1,.content2{
+    width: 50%;
+    font-size: 20px;
+    padding: 10px 0 0 10px;
+}
+.content1{
+    border-right: solid 1px;
+}
+
+.img-table{
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* border: 1px solid #000; */
+}
+.img-table td{
+    border: 1px solid #000;
+
+}
+
+.footer{
+    text-align: center;
+    height: 40px;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+
+
+
+
